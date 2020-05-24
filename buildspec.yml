@@ -7,15 +7,15 @@ phases:
       
   pre_build:
     commands:
-      - echoo Pre build started on `date`   
+      - echo "Pre build started"  
   build:
     commands:
-      - echo Build started on `date`
+      - echo "Actual Build started"
       - mvn clean install 
       
   post_build:
     commands:
-      - echo Post Build completed on `date`
+      - echo "moving to post build stage"
       # - mvn package
 artifacts:
   files:
