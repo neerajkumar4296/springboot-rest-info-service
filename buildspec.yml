@@ -19,4 +19,4 @@ phases:
       # - mvn package
 artifacts:
   files:
-    - target/rest-info-service.2.0.0.jar
+    - target/rest-info-service-v2.0.0.jar
