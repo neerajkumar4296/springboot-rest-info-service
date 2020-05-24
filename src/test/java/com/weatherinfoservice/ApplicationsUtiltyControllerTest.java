@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.weatherinfoservice.delegate.ApplicationDelegate;
 import com.weatherinfoservice.services.MathsOperationService;
+import com.weatherinfoservice.util.DbUtil;
 
 
 @WebMvcTest(ApplicationsUtiltyController.class)
@@ -26,6 +27,10 @@ public class ApplicationsUtiltyControllerTest {
 
 	@MockBean
 	private ApplicationDelegate applicationDelegate;
+	
+	
+	@MockBean
+	private DbUtil dbUtil;
 	
 	@MockBean
 	private MathsOperationService mathsOperationService;
