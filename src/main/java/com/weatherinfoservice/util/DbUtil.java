@@ -30,11 +30,11 @@ public class DbUtil {
 	
 		public void saveEmployeeDetails() {
 		
-//			Address addresstemp= new Address("B155/303", "Sukhobrishti, Shapoorji", "Kolkata", "West Bengal", "India", 700135, AddressType.TEMPORARY);
-//			Address addressperm= new Address("141", "Station Road,", "Khagaria", "Bihar", "India", 851204, AddressType.HOME);
-//		    List<Address> addressesNeeraj = new ArrayList<>();
-//		    addressesNeeraj.add(addresstemp);
-//		    addressesNeeraj.add(addressperm);
+			Address addresstemp= new Address("B155/303", "Sukhobrishti, Shapoorji", "Kolkata", "West Bengal", "India", 700135, AddressType.TEMPORARY);
+			Address addressperm= new Address("141", "Station Road,", "Khagaria", "Bihar", "India", 851204, AddressType.HOME);
+		    List<Address> addressesNeeraj = new ArrayList<>();
+		    addressesNeeraj.add(addresstemp);
+		    addressesNeeraj.add(addressperm);
 			
 		    Address addresstempO= new Address("B155/303", "Sukhobrishti, Shapoorji", "Kolkata", "West Bengal", "India", 700135, AddressType.TEMPORARY);
 		    Address addressPerm= new Address("58", "Thana Chowk", "Samastipur", "Bihar", "India", 848114, AddressType.HOME);		    
@@ -43,9 +43,9 @@ public class DbUtil {
 			addressesOther.add(addresstempO);
 			addressesOther.add(addressOffice);
 			addressesOther.add(addressPerm);
-//		Employee empNeeraj= new 
-//				Employee(986845L, "Neeraj", "Kumar", LocalDate.of(1995, 12, 31), 50000L, Qualification.GRADUATE, addressesNeeraj);
-//		
+		Employee empNeeraj= new 
+				Employee(986845L, "Neeraj", "Kumar", LocalDate.of(1995, 12, 31), 50000L, Qualification.GRADUATE, addressesNeeraj);
+		
 		Employee empOther= new 
 				Employee(1073214L, "Aditya", "Gupta", LocalDate.of(1992, 03, 24), 60000L, Qualification.GRADUATE, addressesOther);
 		
@@ -58,8 +58,8 @@ public class DbUtil {
 //				session.getTransaction().commit();
 //			    session.close();
 		
-				//empRepository.saveAll(Arrays.asList(empNeeraj, empOther));
-				empRepository.save(empOther);
+				empRepository.saveAll(Arrays.asList(empNeeraj, empOther));
+				//empRepository.save(empOther);
 	}
 		
 		public List<Employee> fetchAllEmployees(){
