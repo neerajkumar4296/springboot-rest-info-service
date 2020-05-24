@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+#  install:
+#    runtime-versions:
+#      java: corretto8
+      
+  pre_build:
+    commands:
+      - echoo Pre build started on `date`   
+  build:
+    commands:
+      - echo Build started on `date`
+      - mvn clean install 
+      
+  post_build:
+    commands:
+      - echo Post Build completed on `date`
+      # - mvn package
+artifacts:
+  files:
+    - target/rest-info-service.2.0.0.jar

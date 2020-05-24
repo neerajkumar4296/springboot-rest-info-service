@@ -1,0 +1,17 @@
+## to override default spring cloud config properties use bootstrap.yml...like i am using
+
+spring:
+  cloud:
+    config:
+      ##uri: http://localhost:5000
+      uri: http://cloud-config-service-dev1.ap-south-1.elasticbeanstalk.com
+      name: ${spring.application.name}
+      profile: dev1
+#      failFast: true
+      retry:
+        maxAttempts: 20
+      ##enabled: false-- not working anyway
+  application:
+    name: rest-info-service
+  profiles:
+    active: dev1
