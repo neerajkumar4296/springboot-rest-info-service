@@ -7,10 +7,13 @@ import com.weatherinfoservice.model.WeatherReport;
 
 public class MockTestData {
 	
-	private static final String weatherReportJsonAsString=
-			
-			"{\"coord\":{\"lon\":88.37,\"lat\":22.57},\"weather\":[{\"id\":721,\"main\":\"Haze\",\"description\":\"haze\",\"icon\":\"50n\"}],\"base\":\"stations\",\"main\":{\"temp\":32,\"feels_like\":36.07,\"temp_min\":32,\"temp_max\":32,\"pressure\":1006,\"humidity\":70},\"visibility\":3500,\"wind\":{\"speed\":4.1,\"deg\":210},\"clouds\":{\"all\":40},\"dt\":1585749865,\"sys\":{\"type\":1,\"id\":9114,\"country\":\"IN\",\"sunrise\":1585699132,\"sunset\":1585743690},\"timezone\":19800,\"id\":1275004,\"name\":\"Kolkata\",\"cod\":200}";
-	
+	private static final String weatherReportJsonAsString=			
+			"{\"coord\":{\"lon\":88.37,\"lat\":22.57},"
+			+ "\"weather\":[{\"id\":721,\"main\":\"Haze\",\"description\":\"haze\",\"icon\":\"50d\"}],"
+			+ "\"main\":{\"temp\":33,\"feels_like\":35.98,\"temp_min\":33,\"temp_max\":33,\"pressure\":1003,\"humidity\":79},\"visibility\":3600,"
+			+ "\"wind\":{\"speed\":8.7,\"deg\":180},\"dt\":1590398180,"
+			+ "\"sys\":{\"type\":1,\"id\":9114,\"country\":\"IN\",\"sunrise\":1590362581,\"sunset\":1590410655},"
+			+ "\"timezone\":19800,\"id\":1275004,\"name\":\"Kolkata\",\"cod\":200}";
 	private static final String weatherReportsFormattedString= "Weather report for Kolkata(IN) generated on:: 2020-04-02T23:40:22\r\n" + 
 			"city name:: London, coordinates::  longitude:: -0.13 latitude:: 51.51\r\n" + 
 			"weather type:: few clouds\r\n" + 

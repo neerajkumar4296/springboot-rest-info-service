@@ -49,11 +49,11 @@ public class WeatherInfoControllerTest {
 	   
 	   private static final String LOCATION= "Kolkata";
 	   
-	   static String weatherReportAsFormmattedString;
+	   private static String weatherReportAsFormmattedString;
 	   
 	   @BeforeAll
 	   static void initializeData() throws JsonMappingException, JsonProcessingException {
-		   //weatherReport=MockTestData.getMockWeatherReport();
+		   weatherReport=MockTestData.getMockWeatherReport();
 		   weatherReportAsFormmattedString=MockTestData.getMockWeatherDataAsFormattedString();
 	   }
 	   
@@ -67,7 +67,7 @@ public class WeatherInfoControllerTest {
 	   
 	   @Test
 	   @DisplayName("Test for CityWeatherReport call(Json Response)")
-	   @Disabled
+	   //@Disabled
 	   public void testCityWeatherReport() throws Exception
 	   {
 		   when(this.applicationDelegate.getCityWeatherInfo(LOCATION)).thenReturn(weatherReport);

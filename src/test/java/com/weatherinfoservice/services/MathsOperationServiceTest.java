@@ -13,6 +13,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.InjectMocks;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import com.weatherinfoservice.exceptions.BadServiceRequestException;
 import com.weatherinfoservice.exceptions.NotImplementedOperationTypeException;
 import com.weatherinfoservice.model.MathsInputRequest;
 import com.weatherinfoservice.model.OperationType;
@@ -96,7 +97,7 @@ class MathsOperationServiceTest {
 	
 	  private static Stream<Arguments> getTestPerformScenarioArguments(){ return
 	  Stream.of(Arguments.of(23.25,36.48,OperationType.SUM), 
-			  Arguments.of(7.5,10,OperationType.MULTIPLY), Arguments.of(10,25,OperationType.DIVIDE) );
+			  Arguments.of(7.5,10,OperationType.MULTIPLY), Arguments.of(10,25,OperationType.DIVIDE), Arguments.of(10,25,OperationType.HCF) );
 	  }
 	  
 	  private static Stream<Arguments> getTestShowOperationResultScenarioArguments(){ return
