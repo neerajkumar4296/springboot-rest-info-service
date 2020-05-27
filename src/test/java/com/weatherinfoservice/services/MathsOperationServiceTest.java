@@ -5,27 +5,30 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.mockito.InjectMocks;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.weatherinfoservice.exceptions.BadServiceRequestException;
 import com.weatherinfoservice.exceptions.NotImplementedOperationTypeException;
 import com.weatherinfoservice.model.MathsInputRequest;
 import com.weatherinfoservice.model.OperationType;
 
-@ExtendWith(SpringExtension.class)
+@ExtendWith(MockitoExtension.class)
 class MathsOperationServiceTest {
 
-	@InjectMocks
-	MathsOperationService mathsOperationService;
-
-	@InjectMocks
-	MathsInputRequest mathsInputRequest;
+	
+	private MathsOperationService mathsOperationService;
+	
+	private MathsInputRequest mathsInputRequest;
+	
+	@BeforeEach
+	public void setUp() {
+		mathsOperationService=new MathsOperationService();
+	}
 
 	@ParameterizedTest
 	@MethodSource("getTestPerformScenarioArguments")

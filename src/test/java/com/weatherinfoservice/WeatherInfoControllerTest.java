@@ -2,6 +2,7 @@ package com.weatherinfoservice;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -9,10 +10,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -24,8 +23,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.weatherinfoservice.delegate.ApplicationDelegate;
 import com.weatherinfoservice.model.WeatherReport;
-import com.weatherinfoservice.model.test.MockTestData;
-import com.weatherinfoservice.services.WeatherService;
+import com.weatherinfoservice.test.data.MockTestData;
 
 
 @WebMvcTest(value = WeatherInfoController.class)
@@ -36,14 +34,8 @@ public class WeatherInfoControllerTest {
 	   private MockMvc mockMvc;
 	   
   
-	   @InjectMocks
-	   private WeatherInfoController weatherInfoController;
-	   
-	   
 	   @MockBean
 	   private ApplicationDelegate applicationDelegate;
-	   //private WeatherService weatherService;
-	   
 	   
 	   private static WeatherReport weatherReport;
 	   
@@ -70,11 +62,11 @@ public class WeatherInfoControllerTest {
 	   //@Disabled
 	   public void testCityWeatherReport() throws Exception
 	   {
-		   when(this.applicationDelegate.getCityWeatherInfo(LOCATION)).thenReturn(weatherReport);
+		   given(this.applicationDelegate.getCityWeatherInfo(LOCATION)).willReturn(weatherReport);
 		   
 		            this.mockMvc.perform(get("/weather/cityweatherreport/{location}", LOCATION)
 				   .accept(WeatherInfoController.WEATHER_REPORT_JSON_VALUE))
-		           .andExpect(MockMvcResultMatchers.status().isOk())
+		           .andExpect(status().isOk())
 		           .andExpect(jsonPath("$.cityName", is(LOCATION)))
 		           .andExpect(jsonPath("$.coordinates").isNotEmpty());
 	   }
@@ -84,6 +76,7 @@ public class WeatherInfoControllerTest {
 	   public void testCityWeatherReportString() throws Exception
 	   {
 		   when(this.applicationDelegate.getCityWeatherInfoConcised(LOCATION)).thenReturn(weatherReportAsFormmattedString);
+		   
 		   
 		            this.mockMvc.perform(get("/weather/cityweatherreport/{location}/concised", LOCATION))
 		           .andExpect(MockMvcResultMatchers.status().isOk())

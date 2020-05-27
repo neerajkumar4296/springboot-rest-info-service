@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.URI;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -22,12 +23,15 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.weatherinfoservice.exceptions.BadServiceRequestException;
+import com.weatherinfoservice.model.Address;
 import com.weatherinfoservice.model.CoronaCasesSummary;
 import com.weatherinfoservice.model.CountrySummary;
+import com.weatherinfoservice.model.Employee;
 import com.weatherinfoservice.model.GlobalSummary;
 import com.weatherinfoservice.model.WeatherReport;
 import com.weatherinfoservice.services.CoronaSummaryService;
 import com.weatherinfoservice.services.CountryInfoService;
+import com.weatherinfoservice.services.EmployeeService;
 import com.weatherinfoservice.services.WeatherService;
 
 @Component
@@ -39,6 +43,9 @@ public class ApplicationDelegate {
 	@Autowired
 	@Qualifier("loadBalancedRestTemplate")
 	private RestTemplate restServiceTemplate;
+	
+	@Autowired
+	EmployeeService employeeService;
 
 	@Autowired
 	private CountryInfoService countryInfoService;
@@ -111,6 +118,30 @@ public class ApplicationDelegate {
 
 	public String getServicApiEndPoint(String location) {
 		return weatherService.getWeatherServicApiEndPoint(location);
+	}
+	
+	public void saveEmployees() {
+		employeeService.saveEmployeeDetails();
+	}
+	
+	public List<Employee> findAllEmployees() {
+		return employeeService.fetchAllEmployees();
+	}
+	
+	public Employee employeeDetailsById(Long employeeId ) {
+		return employeeService.fetchEmployeewithId(employeeId);
+	}
+	
+	public List<Address> employeeAddresses() {
+		return employeeService.fetchAllAddresses();
+	}
+	
+	public List<Address> employeeAddressesById(Long employeeId) {
+		return employeeService.fetchEmployeeAddresses(employeeId);
+	}
+	
+	public List<Employee> employeesWithOfficeAddress() {
+		return employeeService.fetchEmployeesWithOfficeAddress();
 	}
 
 }

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.weatherinfoservice.model.Employee;
 
-@Repository
+
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
 }

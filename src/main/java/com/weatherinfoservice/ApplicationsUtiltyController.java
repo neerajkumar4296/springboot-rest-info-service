@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-
 import com.weatherinfoservice.delegate.ApplicationDelegate;
 import com.weatherinfoservice.exceptions.BadServiceRequestException;
 import com.weatherinfoservice.model.Address;
@@ -37,7 +36,6 @@ import com.weatherinfoservice.model.Employee;
 import com.weatherinfoservice.model.MathsInputRequest;
 import com.weatherinfoservice.services.MathsOperationService;
 import com.weatherinfoservice.util.ApplicationUtil;
-import com.weatherinfoservice.util.DbUtil;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -58,8 +56,7 @@ public class ApplicationsUtiltyController {
 	@Autowired
 	ApplicationDelegate applicationDelegate;
 	
-	@Autowired
-	DbUtil dbUtil;
+	
 
 	@GetMapping(value = "/test")
 	public String testController() {
@@ -161,35 +158,35 @@ public class ApplicationsUtiltyController {
 	@GetMapping(value = "employees/save")
 	public void saveEmployeeDetails()  {
 		//DbUtil dbUtil= new DbUtil();
-	    dbUtil.saveEmployeeDetails();
+		applicationDelegate.saveEmployees();
 	}
 	
 	@GetMapping(value = "employees/findAll")
 	public List<Employee> allEmployeeDetails()  {
 		//DbUtil dbUtil= new DbUtil();
-	    return dbUtil.fetchAllEmployees();
+	    return applicationDelegate.findAllEmployees();
 	}
 	
 	@GetMapping(value = "employees/withHomeAddress")
-	public List<Employee> allEmployeeHomeAddresssOnly()  {
+	public List<Employee> employeesHavingOfficeAddresss()  {
 		//DbUtil dbUtil= new DbUtil();
-	    return dbUtil.fetchEmployeeWithOfficeAddress();
+	    return applicationDelegate.employeesWithOfficeAddress();
 	}
 	
 	@GetMapping(value = "employees/allAddresses")
 	public List<Address> allEmployeesAddress()  {
 		//DbUtil dbUtil= new DbUtil();
-	return dbUtil.fetchAllAddresses();
+	return applicationDelegate.employeeAddresses();
 	}
 	
 	@GetMapping(value = "employees/employee/{employeeId}/addresses")
 	public List<Address> employeeAddresses(@PathVariable Long employeeId)  {
-	return dbUtil.fetchEmployeeAddresses(employeeId);
+	return applicationDelegate.employeeAddressesById(employeeId);
 	}
 	
 	@GetMapping(value = "employees/employee/{employeeId}")
 	public Employee employeeDetails(@PathVariable Long employeeId)  {
-	return dbUtil.fetchEmployeewithId(employeeId);
+	return applicationDelegate.employeeDetailsById(employeeId);
 	}
 
 	private String getUserName() {

@@ -1,7 +1,6 @@
 package com.weatherinfoservice.services;
 
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;

@@ -1,8 +1,10 @@
 package com.weatherinfoservice;
 
 import static org.hamcrest.CoreMatchers.containsString;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.Optional;
 
@@ -12,11 +14,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.weatherinfoservice.delegate.ApplicationDelegate;
 import com.weatherinfoservice.services.MathsOperationService;
-import com.weatherinfoservice.util.DbUtil;
 
 
 @WebMvcTest(ApplicationsUtiltyController.class)
@@ -30,9 +30,6 @@ public class ApplicationsUtiltyControllerTest {
 	
 	
 	@MockBean
-	private DbUtil dbUtil;
-	
-	@MockBean
 	private MathsOperationService mathsOperationService;
 	
 	private static final String  attribute="hobby";
@@ -44,11 +41,11 @@ public class ApplicationsUtiltyControllerTest {
 	@Test
 	public void test_getLocalisedContentBasedOnDefaultLanguage() throws Exception {
 		
-		when(this.applicationDelegate.getLocalisedResponse(attribute, empty_languageCode)).thenReturn(attribute);
+		given(this.applicationDelegate.getLocalisedResponse(attribute, empty_languageCode)).willReturn(attribute);
 		
 		this.mockMvc.perform( MockMvcRequestBuilders.get("/utilities/locale/value")
 				.param("attributename", attribute))
-				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(status().isOk())
 				.andExpect(content().string(containsString(attribute.substring(0, 2))));
 	}
 	
@@ -60,7 +57,7 @@ public class ApplicationsUtiltyControllerTest {
 		this.mockMvc.perform( MockMvcRequestBuilders.get("/utilities/locale/value")
 				.param("attributename", attribute)
 				.param("languagecode", french_languageCode.get()))
-				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(status().isOk())
 				.andExpect(content().string(containsString(french_value_hobby.substring(0, 2))));
 	}
 

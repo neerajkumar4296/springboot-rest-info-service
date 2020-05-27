@@ -1,7 +1,5 @@
 package com.weatherinfoservice.services;
 
-import java.util.Optional;
-
 import javax.mail.MessagingException;
 
 import org.slf4j.Logger;
@@ -46,10 +44,12 @@ public class WeatherService {
 	}
 
 	public String getWeatherReportAsFormattedString(String location) {
-		logger.error("getWeatherReportAsFormattedString called for location:: " + location);
 		WeatherInfoUtil weatherInfoUtil= new WeatherInfoUtil();
-		Optional<WeatherReport> weatherReport = Optional.of(openWeatherRestRepository.getWeatherReport(location));
-		return  weatherInfoUtil.textResponseFormatter(weatherReport.get());
+		logger.error("getWeatherReportAsFormattedString called for location:: " + location);
+		WeatherReport weatherReport = openWeatherRestRepository.getWeatherReport(location);
+		String formattedResponseString=weatherInfoUtil.textResponseFormatter(weatherReport);
+		logger.error("returned formattedResponseString:: " +formattedResponseString);
+		return formattedResponseString;
 
 	}
 
