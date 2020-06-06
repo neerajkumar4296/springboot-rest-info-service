@@ -11,7 +11,7 @@ class EmailServiceTest {
 
 	@Test()
 	@Disabled
-	void test() {
+	void test(){
 		fail(()-> "Failed at:: "+LocalDateTime.now().toString());
 	}
 
