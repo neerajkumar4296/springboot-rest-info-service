@@ -6,6 +6,11 @@
 *.txt
 *.db
 
+#other files
+*.yml
+*.db
+/test/java/*.yml
+
 # BlueJ files
 *.ctxt
 
