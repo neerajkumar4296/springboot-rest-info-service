@@ -15,7 +15,7 @@ services:
     basicuri: https://api.covid19api.com/summary
  
 server:
-  port: 8090
+  port: 5000
 #  servlet:
 #    context-path: /${spring.application.name}
     
