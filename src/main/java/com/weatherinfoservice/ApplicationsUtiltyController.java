@@ -45,7 +45,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
 @RequestMapping(value = "utilities")
-@CrossOrigin(origins = {"http://localhost:3000", "http://rest-info-service-dev1.ap-south-1.elasticbeanstalk.com"})
+@CrossOrigin(origins = {"http://localhost:3000"})
 public class ApplicationsUtiltyController {
 
 	private static final Logger logger = LoggerFactory.getLogger(ApplicationsUtiltyController.class);
