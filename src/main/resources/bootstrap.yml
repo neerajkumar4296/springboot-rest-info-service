@@ -9,7 +9,7 @@ spring:
       profile: dev1
 #      failFast: true
       retry:
-        maxAttempts: 20
+        maxAttempts: 2
       ##enabled: false-- not working anyway
   application:
     name: rest-info-service

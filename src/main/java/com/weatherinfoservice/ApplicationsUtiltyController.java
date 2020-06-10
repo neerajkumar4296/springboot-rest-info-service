@@ -15,6 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,6 +45,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
 @RequestMapping(value = "utilities")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ApplicationsUtiltyController {
 
 	private static final Logger logger = LoggerFactory.getLogger(ApplicationsUtiltyController.class);
@@ -139,7 +141,7 @@ public class ApplicationsUtiltyController {
 	    return ApplicationUtil.intToRoman(inputNumber);
 	}
 	
-	@ApiOperation(value = "Corona Virus cases summary for the whole world")
+	@ApiOperation(value = "Corona Virus cases summary for the whole world/ global stats along with country name provided")
 	@ResponseStatus(code = HttpStatus.OK)
 	@RequestMapping(value = "coronaCases/summary", method = RequestMethod.GET, produces=CORONA_SUMMARY_JSON_VALUE)
 	public CoronaCasesSummary coronaVirusSummary(@RequestParam Optional<String> countryName) {
@@ -153,6 +155,22 @@ public class ApplicationsUtiltyController {
 	public CountrySummary coronaVirusSummaryForCountry(@PathVariable String countryName) {
 		logger.info("coronaVirusSummary method called in " +this.getClass().getSimpleName());
 	    return applicationDelegate.getCoronaInfoForCountry(countryName);
+	}
+	
+	@ApiOperation(value = "Corona Virus cases summary sorted by the total confirmed cases")
+	@ResponseStatus(code = HttpStatus.OK)
+	@RequestMapping(value = "coronaCases/summary/sorted", method = RequestMethod.GET, produces=CORONA_COUNTRY_SUMMARY_JSON_VALUE)
+	public List<CountrySummary> summarySortedByTotalConfirmedCases() {
+		logger.info("summarySortedByTotalConfirmedCases method called in " +this.getClass().getSimpleName());
+	    return applicationDelegate.getCoronaInfoByCount();
+	}
+	
+	@ApiOperation(value = "Corona Virus total newly confirmed cases")
+	@ResponseStatus(code = HttpStatus.OK)
+	@RequestMapping(value = "coronaCases/newlyConfirmed", method = RequestMethod.GET)
+	public int totalNewlyConfirmedCases() {
+		logger.info("totalNewlyConfirmedCases method called in " +this.getClass().getSimpleName());
+	    return applicationDelegate.getTotalNewConfirmedCases();
 	}
 	
 	@GetMapping(value = "employees/save")

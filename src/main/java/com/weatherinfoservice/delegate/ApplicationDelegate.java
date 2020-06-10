@@ -76,21 +76,26 @@ public class ApplicationDelegate {
 	}
 
 	public String getCountryInfo(String countryName) {
-
 		return countryInfoService.getCounrtyInfoFromService(countryName);
 
 	}
 
 	public CoronaCasesSummary getCoronaInfo(Optional<String> countryName) {
-		if(countryName.isPresent()) {
-			return coronaSummaryService.getCoronaCasesSummaryForCountryWithGlobe(countryName.get());
-		}
+		if(countryName.isPresent()) return coronaSummaryService.getCoronaCasesSummaryForCountryWithGlobe(countryName.get());
+		
 		return coronaSummaryService.getCoronaCasesSummaryFromService();
 	}
 	
 	public CountrySummary getCoronaInfoForCountry(String countryName) {
-
 		return coronaSummaryService.getCoronaCasesSummaryForCountry(countryName);
+	}
+	
+	public List<CountrySummary> getCoronaInfoByCount() {
+		return coronaSummaryService.coronaCasesByCount();
+	}
+	
+	public int getTotalNewConfirmedCases() {
+		return coronaSummaryService.totalNewlyConfirmed();
 	}
 
 	public String analyzeContentInTheFile(MultipartFile inputFile) throws IOException {

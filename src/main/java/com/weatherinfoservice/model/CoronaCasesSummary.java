@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({ "worldSummary", "countriesSummary", "lastUpdatedTime" })
 public class CoronaCasesSummary {
 
-	
 	    private GlobalSummary worldSummary;
 
 	    private List<CountrySummary> countriesSummary;

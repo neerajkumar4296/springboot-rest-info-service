@@ -1,7 +1,10 @@
 package com.weatherinfoservice.services;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,6 +52,23 @@ public class CoronaSummaryService {
 		coronaCasesSummaryResponse.setLocalDateTime(coronaCasesSummary.getLocalDateTime());
 		
 		return coronaCasesSummaryResponse;
+	}
+	
+	public List<CountrySummary> coronaCasesByCount(){
+		List<CountrySummary> countrySummaries= getCoronaCasesSummaryFromService().getCountrySummaries();
+		
+		return countrySummaries.parallelStream()
+		.sorted(Comparator.comparingInt(CountrySummary::getTotalConfirmed).reversed())
+		.collect(Collectors.toList());
+	}
+	
+	public int totalNewlyConfirmed(){
+		List<CountrySummary> countrySummaries= getCoronaCasesSummaryFromService().getCountrySummaries();
+		
+		return 
+		      countrySummaries.parallelStream()
+		                      .mapToInt(CountrySummary::getNewConfirmed)
+		                      .sum();
 	}
 
 }

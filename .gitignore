@@ -7,9 +7,8 @@
 *.db
 
 #other files
-*.yml
-*.db
-/test/java/*.yml
+data/info/*
+*/test/java/*.yml
 
 # BlueJ files
 *.ctxt
