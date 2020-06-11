@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonPropertyOrder({ "countryName", "countryCode", "simpleName", "confirmed", "newlyConfirmed",  "deaths", "newDeaths", "recovered", "newlyRecovered", "updatedTime"  })
+@JsonPropertyOrder({ "countryName", "countryCode", "simpleName", "confirmed", "recovered",  "active",  "deaths", "newlyConfirmed",  "newDeaths", "newlyRecovered", "updatedTime"  })
 public class CountrySummary {
 
 	
@@ -19,6 +19,8 @@ public class CountrySummary {
 
 	    private int confirmed;
 
+	    private int active;
+	    
 	    private int newDeaths;
 
 	    private int deaths;
@@ -63,6 +65,14 @@ public class CountrySummary {
 		public void setNewConfirmed(int newConfirmed) {
 			this.newlyConfirmed = newConfirmed;
 		}
+		
+		public int getActive() {
+			return this.getTotalConfirmed()-this.getTotalRecovered();
+		}
+		public void setActive(int active) {
+			this.active = active;
+		}
+
 		@JsonProperty("confirmed")
 		public int getTotalConfirmed() {
 			return confirmed;
@@ -103,6 +113,7 @@ public class CountrySummary {
 		public void setTotalRecovered(int totalRecovered) {
 			this.recovered = totalRecovered;
 		}
+		
 		
 		@JsonProperty("updatedTime")
 		public LocalDateTime getUpdatedTime() {
