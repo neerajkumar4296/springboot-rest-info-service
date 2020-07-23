@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonPropertyOrder({ "countryName", "countryCode", "simpleName", "confirmed", "recovered",  "active",  "deaths", "newlyConfirmed",  "newDeaths", "newlyRecovered", "updatedTime"  })
-public class CountrySummary {
+public class CountrySummary extends GlobalSummary {
 
 	
 	    private String countryName;
@@ -14,20 +14,6 @@ public class CountrySummary {
 	    private String countryCode;
 
 	    private String simpleName;
-
-	    private int newlyConfirmed;
-
-	    private int confirmed;
-
-	    private int active;
-	    
-	    private int newDeaths;
-
-	    private int deaths;
-
-	    private int newlyRecovered;
-
-	    private int recovered;
 
 	    private LocalDateTime updatedTime;
 
@@ -56,62 +42,6 @@ public class CountrySummary {
 		@JsonProperty("Slug")
 		public void setSimpleName(String simpleName) {
 			this.simpleName = simpleName;
-		}
-		@JsonProperty("newlyConfirmed")
-		public int getNewConfirmed() {
-			return newlyConfirmed;
-		}
-		@JsonProperty("NewConfirmed")
-		public void setNewConfirmed(int newConfirmed) {
-			this.newlyConfirmed = newConfirmed;
-		}
-		
-		public int getActive() {
-			return this.getTotalConfirmed()-this.getTotalRecovered();
-		}
-		public void setActive(int active) {
-			this.active = active;
-		}
-
-		@JsonProperty("confirmed")
-		public int getTotalConfirmed() {
-			return confirmed;
-		}
-		@JsonProperty("TotalConfirmed")
-		public void setTotalConfirmed(int totalConfirmed) {
-			this.confirmed = totalConfirmed;
-		}
-		@JsonProperty("newDeaths")
-		public int getNewDeaths() {
-			return newDeaths;
-		}
-		@JsonProperty("NewDeaths")
-		public void setNewDeaths(int newDeaths) {
-			this.newDeaths = newDeaths;
-		}
-		@JsonProperty("deaths")
-		public int getTotalDeaths() {
-			return deaths;
-		}
-		@JsonProperty("TotalDeaths")
-		public void setTotalDeaths(int totalDeaths) {
-			this.deaths = totalDeaths;
-		}
-		@JsonProperty("newlyRecovered")
-		public int getNewRecovered() {
-			return newlyRecovered;
-		}
-		@JsonProperty("NewRecovered")
-		public void setNewRecovered(int newRecovered) {
-			this.newlyRecovered = newRecovered;
-		}
-		@JsonProperty("recovered")
-		public int getTotalRecovered() {
-			return recovered;
-		}
-		@JsonProperty("TotalRecovered")
-		public void setTotalRecovered(int totalRecovered) {
-			this.recovered = totalRecovered;
 		}
 		
 		

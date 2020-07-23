@@ -3,12 +3,14 @@ package com.weatherinfoservice.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonPropertyOrder({ "confirmed", "newlyConfirmed", "deaths", "newDeaths", "recovered", "newlyRecovered", })
+@JsonPropertyOrder({ "confirmed", "recovered", "active", "deaths", "newlyConfirmed", "newDeaths",  "newlyRecovered", })
 public class GlobalSummary {
 
 	private int newlyConfirmed;
 
 	private int confirmed;
+	
+	private int active;
 
 	private int newDeaths;
 
@@ -36,6 +38,14 @@ public class GlobalSummary {
 	@JsonProperty("TotalConfirmed")
 	public void setTotalConfirmed(int totalConfirmed) {
 		this.confirmed = totalConfirmed;
+	}
+
+	public int getActive() {
+		return this.getTotalConfirmed()-this.getTotalRecovered()-this.getTotalDeaths();
+	}
+
+	public void setActive(int active) {
+		this.active = active;
 	}
 
 	@JsonProperty("newDeaths")

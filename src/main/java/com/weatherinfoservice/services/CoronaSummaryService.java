@@ -22,7 +22,13 @@ public class CoronaSummaryService {
 	RestServiceRepository countryInfoRestRepository;
 	
 	public CoronaCasesSummary getCoronaCasesSummaryFromService() {
-		return countryInfoRestRepository.getCoronaCasesSummary();
+		CoronaCasesSummary coronaCasesSummary= countryInfoRestRepository.getCoronaCasesSummary();
+		List<CountrySummary> countrySummaries= coronaCasesSummary.getCountrySummaries()
+		.stream()
+		.sorted(Comparator.comparingInt(CountrySummary::getTotalConfirmed).reversed())
+		.collect(Collectors.toList());
+		coronaCasesSummary.setCountrySummaries(countrySummaries);
+		return coronaCasesSummary;
 	}
 	
 	
@@ -30,7 +36,7 @@ public class CoronaSummaryService {
 	public CountrySummary getCoronaCasesSummaryForCountry(String countryName) {
 		return 
 				getCoronaCasesSummaryFromService().getCountrySummaries()
-				.stream()
+				.parallelStream()
 				.filter(countrySummary-> countrySummary.getCountryName().equalsIgnoreCase(countryName))
 				.findFirst()
 				.orElseThrow(()-> new BadServiceRequestException("invalid Country name was provided"));
@@ -67,7 +73,7 @@ public class CoronaSummaryService {
 		
 		return 
 		      countrySummaries.parallelStream()
-		                      .mapToInt(CountrySummary::getNewConfirmed)
+		                      .mapToInt(CountrySummary::getNewlyConfirmed)
 		                      .sum();
 	}
 
