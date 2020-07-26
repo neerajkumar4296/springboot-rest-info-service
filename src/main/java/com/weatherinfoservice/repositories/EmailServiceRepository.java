@@ -4,8 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.mail.MessagingException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +25,7 @@ public class EmailServiceRepository {
 	@Autowired
 	EmailService emailService;
 	
-	public void sendEmailRequest(WeatherReport weatherReport) throws MessagingException {
+	public void sendEmailRequest(WeatherReport weatherReport) {
 		List<String> emailAddressesMasked=Arrays.asList(emailAddresses.split(",")).stream().
 		map(emailAddress-> emailAddress.replaceAll("(?<=.{4}).(?=[^@]*?@)", "*")).collect(Collectors.toList());
 		emailService.sendEmail(emailAddresses, weatherReport);

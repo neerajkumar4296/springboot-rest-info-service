@@ -1,5 +1,7 @@
 package com.weatherinfoservice.util;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -36,6 +38,11 @@ public class ApplicationUtil {
 		String firstName="rahul";
 		String passengerFirstName= firstName.substring(0, 1).toUpperCase()+ firstName.substring(1);
 		System.out.println("first letter uppercase:: " +passengerFirstName);
+		
+		DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
+		LocalTime time= LocalTime.now();
+		System.out.println("24 hr time:: "+time);
+		System.out.println("12 hrs format time:: "+time.format(timeFormatter));
 		
 		List<String> emailAddressesMasked=Arrays.asList(emailAddresses.split(",")).stream().
 				map(emailAddress-> emailAddress.replaceAll("(?<=.{4}).(?=[^@]*?@)", "*")).collect(Collectors.toList());
